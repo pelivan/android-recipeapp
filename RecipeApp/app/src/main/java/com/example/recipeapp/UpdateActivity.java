@@ -6,6 +6,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.DialogInterface;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -26,6 +28,10 @@ public class UpdateActivity extends AppCompatActivity {
         author_input = findViewById(R.id.author_input2);
         ingredients_input = findViewById(R.id.recipe_ingredients2);
         details_input = findViewById(R.id.recipe_input2);
+        author_input.addTextChangedListener(addTextWatcher);
+        details_input.addTextChangedListener(addTextWatcher);
+        title_input.addTextChangedListener(addTextWatcher);
+        ingredients_input.addTextChangedListener(addTextWatcher);
         update_button = findViewById(R.id.update_button);
         delete_button = findViewById(R.id.delete_button);
         //Prvo ovo pa onda updatedata inace nece radit
@@ -57,6 +63,29 @@ public class UpdateActivity extends AppCompatActivity {
 
 
     }
+
+    private TextWatcher addTextWatcher = new TextWatcher() {
+        @Override
+        public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+        }
+
+        @Override
+        public void onTextChanged(CharSequence s, int start, int before, int count) {
+            String titleInput = title_input.getText().toString().trim();
+            String authorInput = author_input.getText().toString().trim();
+            String ingInput = ingredients_input.getText().toString().trim();
+            String recipeInput = details_input.getText().toString().trim();
+
+            update_button.setEnabled(!titleInput.isEmpty() && !authorInput.isEmpty() && !ingInput.isEmpty() && !recipeInput.isEmpty());
+
+        }
+
+        @Override
+        public void afterTextChanged(Editable s) {
+
+        }
+    };
 
     void getAndSetIntentData(){
         if(getIntent().hasExtra("id") && getIntent().hasExtra("title") && getIntent().hasExtra("author") && getIntent().hasExtra("ingredients") && getIntent().hasExtra("details")){

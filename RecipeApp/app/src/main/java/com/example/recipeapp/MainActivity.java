@@ -60,6 +60,8 @@ public class MainActivity extends AppCompatActivity {
 
     void storeDataInArrays(){
         Cursor cursor = myDB.readAllData();
+
+
         if(cursor.getCount() == 0) {
             Toast.makeText(this,"No data to read!",Toast.LENGTH_SHORT).show();
         }else{
@@ -72,4 +74,36 @@ public class MainActivity extends AppCompatActivity {
             }
         }
     }
+
+    @Override
+    public void onResume(){
+        super.onResume();
+
+        setContentView(R.layout.activity_main);
+
+        recyclerView = findViewById(R.id.recyclerView);
+        add_button = findViewById(R.id.add_button);
+        add_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MainActivity.this , AddActivity.class);
+                startActivity(intent);
+            }
+        });
+        myDB = new MyDatabaseHelper(MainActivity.this);
+        recipe_id = new ArrayList<>();
+        recipe_title = new ArrayList<>();
+        recipe_author = new ArrayList<>();
+        recipe_ingredients = new ArrayList<>();
+        recipe_details = new ArrayList<>();
+
+        storeDataInArrays();
+        customAdapter = new CustomAdapter(MainActivity.this,this,recipe_id,recipe_title,recipe_author,recipe_ingredients,recipe_details);
+        recyclerView.setAdapter(customAdapter);
+        recyclerView.setLayoutManager(new LinearLayoutManager(MainActivity.this));
+
+
+    }
+
+
 }
