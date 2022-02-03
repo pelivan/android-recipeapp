@@ -17,10 +17,10 @@ import java.util.ArrayList;
 public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHolder> {
     private Context context;
     Activity activity;
-    private ArrayList recipe_id, recipe_title,recipe_author,recipe_ingredients,recipe_details;
+    private ArrayList<String> recipe_id,recipe_title,recipe_author,recipe_ingredients,recipe_details;
     int position;
 
-    CustomAdapter(Activity activity, Context context, ArrayList recipe_id, ArrayList recipe_title, ArrayList recipe_author, ArrayList recipe_ingredients, ArrayList recipe_details) {
+    CustomAdapter(Activity activity, Context context, ArrayList<String> recipe_id, ArrayList<String> recipe_title, ArrayList<String> recipe_author, ArrayList<String> recipe_ingredients, ArrayList<String> recipe_details) {
         this.activity = activity;
         this.context = context;
         this.recipe_id = recipe_id;

@@ -50,6 +50,7 @@ public class UpdateActivity extends AppCompatActivity {
                 ingredients = ingredients_input.getText().toString().trim();
                 details = details_input.getText().toString().trim();
                 myDB.updateData(id,title,author,ingredients,details);
+                finish();
             }
         });
         delete_button.setOnClickListener(new View.OnClickListener() {

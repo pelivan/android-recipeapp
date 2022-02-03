@@ -44,6 +44,7 @@ public class AddActivity extends AppCompatActivity {
                             author_input.getText().toString().trim(),
                             recipe_ingredients.getText().toString().trim(),
                             recipe_input.getText().toString().trim());
+                            finish();
 
             }
         });
